@@ -20,7 +20,7 @@ contract MyToken {
         _mint(_amount*10**uint256(decimals), msg.sender);
     } 
 
-    function aporove(address spender, uint256 amount) external{
+    function approve(address spender, uint256 amount) external{
         allowance[msg.sender][spender]=amount;
         emit Approval(spender,amount);
     }
