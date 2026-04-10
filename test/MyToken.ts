@@ -43,17 +43,26 @@ describe("My Token", () => {
       );
     });
   });
-  it("shoud have 0.5MT", async () => {
-    const signer1 = signers[1];
-    await myTokenC.transfer(
-      hre.ethers.parseUnits("0.5", decimals),
-      signer1.address,
-    );
-    expect(await myTokenC.balance0f(signer1.address)).equal(
-      hre.ethers.parseUnits("0.5", decimals),
-    );
-  });
   describe("Transfer", () => {
+    it("shoud have 0.5MT", async () => {
+      const signer0 = signers[0];
+      const signer1 = signers[1];
+      expect(
+        await myTokenC.transfer(
+          hre.ethers.parseUnits("0.5", decimals),
+          signer1.address,
+        ),
+      )
+        .to.emit(myTokenC, "Transfer")
+        .withArgs(
+          signer0.address,
+          signer1.address,
+          hre.ethers.parseUnits("0.5", decimals),
+        );
+      expect(await myTokenC.balance0f(signer1.address)).equal(
+        hre.ethers.parseUnits("0.5", decimals),
+      );
+    });
     it("shoud be reverted with insufficient balance error", async () => {
       const signer1 = signers[1];
       await expect(
