@@ -10,7 +10,7 @@ contract MyToken {
     uint8 public decimals;
 
     uint256 public totalSupply;
-    mapping(address=>uint256) public balance0f;
+    mapping(address=>uint256) public balanceOf;
     mapping(address=>mapping(address=>uint256)) allowance;
 
     constructor(string memory _name,string memory _symbol, uint8 _decimals, uint256 _amount) {
@@ -29,22 +29,22 @@ contract MyToken {
         address spender =msg.sender;
         require(allowance[from][spender]>=amount,"insufficient allowance");
         allowance[from][spender]-=amount;
-        balance0f[from]-=amount;
-        balance0f[to]+=amount;
+        balanceOf[from]-=amount;
+        balanceOf[to]+=amount;
         emit Transfer(from,to,amount);
     }
 
     function _mint(uint256 amount, address owner) internal{
         totalSupply +=amount;
-        balance0f[owner]+=amount;
+        balanceOf[owner]+=amount;
 
         emit Transfer(address(0),owner,amount);
     }
 
     function transfer(uint256 amount, address to) external{
-        require(balance0f[msg.sender]>=amount,"insufficient balance");
-        balance0f[msg.sender] -=amount;
-        balance0f[to] +=amount;
+        require(balanceOf[msg.sender]>=amount,"insufficient balance");
+        balanceOf[msg.sender] -=amount;
+        balanceOf[to] +=amount;
 
         emit Transfer(msg.sender, to, amount);
     }
