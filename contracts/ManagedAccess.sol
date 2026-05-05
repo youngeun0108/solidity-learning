@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.28;
 
 abstract contract ManagedAccess {
@@ -18,7 +18,7 @@ abstract contract ManagedAccess {
     modifier onlyManager() {
         require(
             msg.sender == manager,
-            "You are not authorized to manage this token"
+            "You are not authorized to manage this contract"
         );
         _;
     }

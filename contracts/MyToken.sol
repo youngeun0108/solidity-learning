@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.28;
 
-import "./ManagedAccess..sol";
+import "./ManagedAccess.sol";
 
 contract MyToken is ManagedAccess{
     event Transfer(address indexed from, address indexed to, uint256 value);
