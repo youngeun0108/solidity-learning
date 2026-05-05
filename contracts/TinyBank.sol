@@ -19,7 +19,7 @@ contract TinyBank is ManagedAccess {
     mapping(address => uint256) public lastClaimedBlock;
 
     uint256 defaultRewardPerBlock=1*10**18;
-    uint256 rewardPerBlock;
+    uint256 public rewardPerBlock;
 
     mapping(address => uint256) public staked;
     uint256 public totalStaked;
@@ -40,7 +40,7 @@ contract TinyBank is ManagedAccess {
         _; // caller's code
     }
 
-    function setRewardPerBlock(uint256 _amount) external onlyManager{
+    function setRewardPerBlock(uint256 _amount) external onlyAllConfirmed{
         rewardPerBlock=_amount;
     }
 
